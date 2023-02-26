@@ -1,7 +1,6 @@
 package telran.util;
 
 import java.util.LinkedList;
-import java.util.NoSuchElementException;
 
 public class StackInt {
 	LinkedList<Integer> list = new LinkedList<>();
@@ -11,8 +10,6 @@ public class StackInt {
 	public void push(int number) {
 		if (list.isEmpty() || number >= sortedList.getLast()) {
 			sortedList.addLast(number);
-		} else {
-			sortedList.addLast((int) sortedList.getLast());
 		}
 		list.addLast(number);
 	}
@@ -20,12 +17,10 @@ public class StackInt {
 	// return a number from top of stack or throws NoSuchElementException
 	// if the stack is empty
 	public int pop() {
-		if (!list.isEmpty()) {
+		if (list.getLast() == sortedList.getLast()) {
 			sortedList.removeLast();
-			return list.removeLast();
-		} else {
-			throw new NoSuchElementException("Stack is empty");
 		}
+		return list.removeLast();
 	}
 
 	// returns true if the stack is empty otherwise false
@@ -35,10 +30,6 @@ public class StackInt {
 
 	// returns maximal value of the stack or throws Exception (if empty)
 	public int getMax() {
-		if (!list.isEmpty()) {
-			return sortedList.getLast();
-		} else {
-			throw new NoSuchElementException("Stack is empty");
-		}
+		return sortedList.getLast();
 	}
 }
