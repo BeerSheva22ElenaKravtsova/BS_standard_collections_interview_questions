@@ -8,7 +8,7 @@ import java.util.HashSet;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import telran.structure.MultiCountersAppl;
+import telran.util.MultiCountersAppl;
 
 class MultiCountersTest {
 	MultiCountersAppl counter;
