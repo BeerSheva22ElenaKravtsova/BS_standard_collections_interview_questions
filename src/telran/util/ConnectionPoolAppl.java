@@ -1,16 +1,13 @@
 package telran.util;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.HashMap;
 import telran.structure.ConnectionPool;
-import telran.util.ConnectionList.Node;
 
 public class ConnectionPoolAppl implements ConnectionPool {
-	protected Map<Integer, Node<Connection>> connectionPool = new LinkedHashMap<>();
+	protected HashMap<Integer, Node> connectionPool = new HashMap<>();
 	protected int maxSize;
 
-	public ConnectionPoolAppl(Map<Integer, Node<Connection>> connectionPool, int maxSize) {
-		this.connectionPool = connectionPool;
+	public ConnectionPoolAppl(int maxSize) {
 		this.maxSize = maxSize;
 	}
 
@@ -60,13 +57,23 @@ public class ConnectionPoolAppl implements ConnectionPool {
 			return true;
 		}
 	}
+	
+	private static class Node {
+		Connection obj;
+		Node prev;
+		Node next;
 
-	private Node<Connection> head;
-	private Node<Connection> tail;
+		Node(Connection obj) {
+			this.obj = obj;
+		}
+	}
+
+	private Node head;
+	private Node tail;
 
 	@Override
 	public boolean addConnection(Connection connection) {
-		Node<Connection> node = new Node<>(connection);
+		Node node = new Node(connection);
 		Integer id = connection != null ? connection.id : null;
 		if (connectionPool.isEmpty()) {
 			connectionPool.put(id, node);
@@ -100,4 +107,6 @@ public class ConnectionPoolAppl implements ConnectionPool {
 		}
 		return res;
 	}
+
+
 }

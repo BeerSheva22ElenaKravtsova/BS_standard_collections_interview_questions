@@ -14,7 +14,7 @@ class ConnectionPoolTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		connectionPool = new ConnectionPoolAppl(new LinkedHashMap<>(), 3);
+		connectionPool = new ConnectionPoolAppl(3);
 		assertTrue(connectionPool.addConnection(new Connection(0, "IP Adress 0", 123)));
 		assertFalse(connectionPool.addConnection(new Connection(0, "IP Adress 1", 124)));
 		assertTrue(connectionPool.addConnection(new Connection(1, "IP Adress 0", 123)));
